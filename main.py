@@ -4,6 +4,13 @@ import datetime
 import system_shutdown_restart as ssr
 import pyttsx3 as py
 import requests as r
+from englisttohindi.englisttohindi import EngtoHindi
+
+
+def engtohin(english_text):
+    eng_text = EngtoHindi(english_text)
+    hin_text = eng_text.convert
+    offline_sound(hin_text)
 
 
 def offline_sound(sound):
@@ -20,7 +27,20 @@ def offline_sound(sound):
 
 
 def VoiceRecognition(text):
-    if 'YouTube' in text:
+
+    if 'translator' in text:
+        A1 = sr.Recognizer()
+        with sr.Microphone() as source:
+            A1.adjust_for_ambient_noise(source, duration=2)
+            offline_sound("speak your word")
+            audio2 = A1.listen(source, timeout=5, phrase_time_limit=5)
+            try:
+                query = A1.recognize_google(audio2)
+                print(query)
+            except:
+                offline_sound("Speak Properly")
+
+    elif 'YouTube' in text:
         A1 = sr.Recognizer()
         url = "https://www.youtube.com/results?search_query="
         with sr.Microphone() as source:
@@ -48,7 +68,7 @@ def VoiceRecognition(text):
                 wb.get().open_new(url + query)
 
             except:
-                print("Speak properly!!!!!")
+                offline_sound("Speak properly!!!!!")
 
     elif 'Python package' in text:
         A1 = sr.Recognizer()
@@ -107,10 +127,12 @@ if __name__ == "__main__":
         offline_sound("Welcome sir. All the connection are online and secured")
     except(r.ConnectionError, r.Timeout) as exception:
         offline_sound("sir. you are not connected with the internet please check your internet connectivity")
+        exit()
+
     # Taking the audio from the user
     try:
         with sr.Microphone() as source:
-            offline_sound("speak your searching platform")
+            offline_sound("speak your command or searching platform")
             print(datetime.datetime.now())
             A.adjust_for_ambient_noise(source, duration=2)  # its recognise the background sound
             offline_sound("listening")
@@ -123,19 +145,21 @@ if __name__ == "__main__":
     try:
         text = A.recognize_google(audio)
         print(text)
-    except sr.UnknownValueError:
+    except sr.RequestError:
         pass
-    y = text.split()
+    splited_text = text.split()
 
-    if text == "shutdown":
+    if "shutdown" in splited_text and "abort" not in splited_text and "how" not in splited_text:
         offline_sound("your system is going to shutdown")
         ssr.shutdown(self=True)
-    if text == "restart":
+    if "restart" in splited_text and "how" not in splited_text:
+        offline_sound("your system is going to restart")
         ssr.restart(self=True)
-    if text == "hibernate":
+    if "hibernate" in splited_text and "how" not in splited_text:
+        offline_sound("your system is going to hibernate")
         ssr.hibernate(self=True)
-    if "about" in y or "abort" in y:
+    if "abort" in splited_text and "shutdown" in splited_text and "how" not in splited_text:
+        offline_sound("your system is going to abort shutdown")
         ssr.abort_shutdown(self=True)
 
     VoiceRecognition(text)
-
