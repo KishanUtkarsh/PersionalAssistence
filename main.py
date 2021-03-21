@@ -6,7 +6,7 @@ import pyttsx3 as py
 import requests as r
 
 
-def offline_sound(text):
+def offline_sound(sound):
     engine = py.init()
     rate = engine.getProperty('rate')
     engine.setProperty('rate', 150)  # setting up speed of the voice
@@ -14,13 +14,13 @@ def offline_sound(text):
     engine.setProperty('voice', voices[1].id)  # setting up girls voice for boys voice remove 1 and put 0.
     volume = engine.getProperty('volume')
     engine.setProperty('volume', 1.0)  # setting volume 0 to 1
-    engine.say(text)
+    engine.say(sound)
     engine.runAndWait()
     engine.stop()
 
 
-def VoiceRecognition(x):
-    if 'YouTube' in x:
+def VoiceRecognition(text):
+    if 'YouTube' in text:
         A1 = sr.Recognizer()
         url = "https://www.youtube.com/results?search_query="
         with sr.Microphone() as source:
@@ -35,7 +35,7 @@ def VoiceRecognition(x):
             except:
                 offline_sound("Speak properly")
 
-    elif 'Wikipedia' in x:
+    elif 'Wikipedia' in text:
         A1 = sr.Recognizer()
         url = "https://en.wikipedia.org/wiki/"
         with sr.Microphone() as source:
@@ -50,7 +50,7 @@ def VoiceRecognition(x):
             except:
                 print("Speak properly!!!!!")
 
-    elif 'Python package' in x:
+    elif 'Python package' in text:
         A1 = sr.Recognizer()
         url = "https://pypi.org/search/?q="
         with sr.Microphone() as source:
@@ -65,7 +65,7 @@ def VoiceRecognition(x):
             except:
                 offline_sound("Speak properly!!!!!")
 
-    elif 'Google' in x:
+    elif 'Google' in text:
         A1 = sr.Recognizer()
         url = "https://www.google.com/search?q="
         with sr.Microphone() as source:
@@ -80,12 +80,12 @@ def VoiceRecognition(x):
             except:
                 offline_sound("Speak properly!!!!!")
 
-    elif x != "":
+    elif text != "":
         A1 = sr.Recognizer()
         url = "https://www.google.com/search?q="
         try:
-            offline_sound("searching" + x + "on google search")
-            wb.get().open_new(url + x)
+            offline_sound("searching" + text + "on google search")
+            wb.get().open_new(url + text)
         except:
             pass
     else:
@@ -97,14 +97,14 @@ if __name__ == "__main__":
     A = sr.Recognizer()
     A1 = sr.Recognizer()
     audio = None
-    x = ""
+    text = ""
 
     # Checking the connectivity of the internet
     url = "http://www.google.com"
     timeout = 5
     try:
         request = r.get(url, timeout=timeout)
-        offline_sound("sir. you are connected with the internet")
+        offline_sound("Welcome sir. All the connection are online and secured")
     except(r.ConnectionError, r.Timeout) as exception:
         offline_sound("sir. you are not connected with the internet please check your internet connectivity")
     # Taking the audio from the user
@@ -114,27 +114,28 @@ if __name__ == "__main__":
             print(datetime.datetime.now())
             A.adjust_for_ambient_noise(source, duration=2)  # its recognise the background sound
             offline_sound("listening")
-            audio = A.listen(source, timeout=15, phrase_time_limit=20)  # its taking the audio from the user and
+            audio = A.listen(source, timeout=5, phrase_time_limit=5)  # its taking the audio from the user and
             print(datetime.datetime.now())
 
     except KeyboardInterrupt:  # it is basically cnt+c
         offline_sound("Exiting")
 
     try:
-        x = A.recognize_google(audio)
-        print(x)
+        text = A.recognize_google(audio)
+        print(text)
     except sr.UnknownValueError:
         pass
-    y = x.split()
+    y = text.split()
 
-    if x == "shutdown":
+    if text == "shutdown":
         offline_sound("your system is going to shutdown")
         ssr.shutdown(self=True)
-    if x == "restart":
+    if text == "restart":
         ssr.restart(self=True)
-    if x == "hibernate":
+    if text == "hibernate":
         ssr.hibernate(self=True)
     if "about" in y or "abort" in y:
         ssr.abort_shutdown(self=True)
 
-    VoiceRecognition(x)
+    VoiceRecognition(text)
+

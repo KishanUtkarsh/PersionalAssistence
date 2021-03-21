@@ -1,0 +1,29 @@
+pyttsx3~=2.90
+requests~=2.25.1
+setuptools~=49.6.0
+pyaudio~=0.2.11astroid==2.3.3
+brotlipy==0.7.0
+certifi==2020.12.5
+cffi @ file:///D:/bld/cffi_1613414140225/work
+chardet @ file:///D:/bld/chardet_1610093646853/work
+colorama==0.4.3
+comtypes==1.1.9
+cryptography @ file:///D:/bld/cryptography_1615406182527/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1593328102638/work
+isort==4.3.21
+lazy-object-proxy==1.4.3
+mccabe==0.6.1
+PyAudio==0.2.11
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1593275161868/work
+pylint==2.4.4
+pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1608055815057/work
+pypiwin32==223
+PySocks @ file:///D:/bld/pysocks_1610291742246/work
+pyttsx3==2.90
+pywin32==300
+requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1608156231189/work
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1590081179328/work
+SpeechRecognition==3.8.1
+urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1615828766818/work
+win-inet-pton @ file:///D:/bld/win_inet_pton_1610147566231/work
+wincertstore==0.2
