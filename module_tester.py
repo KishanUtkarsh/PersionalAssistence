@@ -13,11 +13,15 @@ import pyaudio
 # tts = gTTS(text='welcome kishan how can i help you', lang='en')
 # tts.save("hello.mp3")
 # os.system("hello.mp3")
-from englisttohindi.englisttohindi import EngtoHindi
+# from englisttohindi.englisttohindi import EngtoHindi
+#
+# def engtohin(english_text):
+#     eng_text = EngtoHindi(english_text)
+#     hin_text = eng_text.convert
+#     print(hin_text)
+#
+# engtohin("this is a cow")
 
-def engtohin(english_text):
-    eng_text = EngtoHindi(english_text)
-    hin_text = eng_text.convert
-    print(hin_text)
-
-engtohin("this is a cow")
+from gtts import gTTS
+tts = gTTS('hello'
+tts.save('hello.mp3')

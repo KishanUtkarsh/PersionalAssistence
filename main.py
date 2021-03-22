@@ -5,12 +5,14 @@ import system_shutdown_restart as ssr
 import pyttsx3 as py
 import requests as r
 from englisttohindi.englisttohindi import EngtoHindi
+from gtts import gTTS
 
 
 def engtohin(english_text):
     eng_text = EngtoHindi(english_text)
     hin_text = eng_text.convert
     offline_sound(hin_text)
+    offline_sound("hello sir")
 
 
 def offline_sound(sound):
@@ -36,6 +38,7 @@ def VoiceRecognition(text):
             audio2 = A1.listen(source, timeout=5, phrase_time_limit=5)
             try:
                 query = A1.recognize_google(audio2)
+                engtohin(query)
                 print(query)
             except:
                 offline_sound("Speak Properly")
