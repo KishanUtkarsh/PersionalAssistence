@@ -27,3 +27,7 @@ SpeechRecognition==3.8.1
 urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1615828766818/work
 win-inet-pton @ file:///D:/bld/win_inet_pton_1610147566231/work
 wincertstore==0.2
+
+englisttohindi~=4.1.0
+gtts~=2.2.2
+playsound~=1.2.2

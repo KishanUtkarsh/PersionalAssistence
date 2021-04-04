@@ -21,7 +21,7 @@ import pyaudio
 #     print(hin_text)
 #
 # engtohin("this is a cow")
-
-from gtts import gTTS
-tts = gTTS('hello'
-tts.save('hello.mp3')
+#
+# from gtts import gTTS
+# tts = gTTS('hello'
+# tts.save('hello.mp3')
